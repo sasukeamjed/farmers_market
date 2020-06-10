@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:farmersmarket/src/styles/base.dart';
+import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:farmersmarket/src/styles/text_fields_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,16 @@ class Login extends StatelessWidget {
 
   Widget email(){
     if(Platform.isIOS){
-      return CupertinoTextField();
+      return CupertinoTextField(
+        padding: EdgeInsets.all(12.0),
+        placeholder: 'Email',
+        placeholderStyle: TextFieldsStyles.placeHolder(),
+        style: TextFieldsStyles.text(),
+        textAlign: TextFieldsStyles.textAlign(),
+        cursorColor: TextFieldsStyles.cursorColor(),
+        decoration: TextFieldsStyles.cupertinoDecoration(),
+        prefix: TextFieldsStyles.iconPrefix(CupertinoIcons.mail_solid),
+      );
     }else{
       return TextField();
     }
