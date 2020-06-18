@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:farmersmarket/src/styles/base.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:farmersmarket/src/styles/text_fields_styles.dart';
+import 'package:farmersmarket/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,38 +42,23 @@ class Login extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: TextFieldsStyles.textBoxHorizontal(), vertical: TextFieldsStyles.TextBoxVertical()),
-          child: email(),
+       AppTextField(
+         isIOS: Platform.isIOS,
+         hintText: 'Email',
+         cupertinoIcon: CupertinoIcons.mail_solid,
+         materialIcon: Icons.email,
+         textInputType: TextInputType.emailAddress,
+       ),
+        AppTextField(
+          isIOS: Platform.isIOS,
+          hintText: 'Password',
+          cupertinoIcon: IconData(0xf4c9, fontFamily: CupertinoIcons.iconFont, fontPackage: CupertinoIcons.iconFontPackage),
+          materialIcon: Icons.lock,
+          textInputType: TextInputType.emailAddress,
+          obscureText: true,
         ),
-        password(),
       ],
     );
   }
 
-  Widget email(){
-    if(Platform.isIOS){
-      return CupertinoTextField(
-        padding: EdgeInsets.all(12.0),
-        placeholder: 'Email',
-        placeholderStyle: TextFieldsStyles.placeHolder(),
-        style: TextFieldsStyles.text(),
-        textAlign: TextFieldsStyles.textAlign(),
-        cursorColor: TextFieldsStyles.cursorColor(),
-        decoration: TextFieldsStyles.cupertinoDecoration(),
-        prefix: TextFieldsStyles.iconPrefix(CupertinoIcons.mail_solid),
-      );
-    }else{
-      return TextField();
-    }
-
-  }
-
-  Widget password(){
-    if(Platform.isIOS){
-      return CupertinoTextField();
-    }else{
-      return TextField();
-    }
-  }
 }
