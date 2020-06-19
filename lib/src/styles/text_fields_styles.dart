@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class TextFieldsStyles{
-  static double get textBoxHorizontal => 25.0;
+  static double get textBoxHorizontal => BaseStyles.ListFieldHorizontal;
 
-  static double get TextBoxVertical=> 8.0;
+  static double get TextBoxVertical=> BaseStyles.ListFieldVertical;
 
   static TextStyle get text=> TextStyles.body;
 

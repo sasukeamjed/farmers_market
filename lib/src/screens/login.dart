@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:farmersmarket/src/styles/base.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
+import 'package:farmersmarket/src/styles/text.dart';
 import 'package:farmersmarket/src/styles/text_fields_styles.dart';
 import 'package:farmersmarket/src/widgets/button.dart';
+import 'package:farmersmarket/src/widgets/social_buttons.dart';
 import 'package:farmersmarket/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -58,7 +61,48 @@ class Login extends StatelessWidget {
           textInputType: TextInputType.emailAddress,
           obscureText: true,
         ),
-        AppButton(),
+        AppButton(buttonText: 'Login', buttonType: ButtonType.LightBlue,),
+        SizedBox(
+          height: 6,
+        ),
+        Center(
+          child: Text('Or', style: TextStyles.suggestion,),
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        Padding(
+          padding: BaseStyles.listPadding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AppSocialButton(socialType: SocialType.Facebook,),
+              SizedBox(
+                width: 15,
+              ),
+              AppSocialButton(socialType: SocialType.Google,),
+            ],
+          ),
+        ),
+        Padding(
+          padding: BaseStyles.listPadding,
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              text: 'New Here? ',
+              style: TextStyles.body,
+              children: [
+                TextSpan(
+                  text: 'Signup',
+                  style: TextStyles.link,
+                  recognizer: TapGestureRecognizer()
+                  ..onTap = () => Navigator.pushNamed(context, '/signup')
+                  ,
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
