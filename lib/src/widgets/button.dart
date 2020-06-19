@@ -1,3 +1,4 @@
+import 'package:farmersmarket/src/styles/base.dart';
 import 'package:farmersmarket/src/styles/buttons.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ class AppButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: AppColors.lightBlue,
-        
+        borderRadius: BorderRadius.circular(BaseStyles.borderRadius),
+
       ),
     );
   }

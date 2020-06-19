@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:farmersmarket/src/styles/base.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:farmersmarket/src/styles/text_fields_styles.dart';
+import 'package:farmersmarket/src/widgets/button.dart';
 import 'package:farmersmarket/src/widgets/textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class Login extends StatelessWidget {
           textInputType: TextInputType.emailAddress,
           obscureText: true,
         ),
+        AppButton(),
       ],
     );
   }
