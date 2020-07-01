@@ -1,31 +1,59 @@
+import 'package:farmersmarket/src/blocs/auth_bloc.dart';
 import 'package:farmersmarket/src/routes.dart';
+import 'package:farmersmarket/src/screens/landing.dart';
 import 'package:farmersmarket/src/screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class App extends StatelessWidget {
+import 'package:provider/provider.dart';
+
+class App extends StatefulWidget {
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final authBloc = AuthBloc();
+
   @override
   Widget build(BuildContext context) {
-    return PlatformApp();
+    return MultiProvider(
+      child: PlatformApp(),
+      providers: [
+        Provider(
+          create: (context) => authBloc,
+        ),
+        FutureProvider(
+          create: (context) => authBloc.isLoggedIn(),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
   }
 }
 
 class PlatformApp extends StatelessWidget {
-  @override
   Widget build(BuildContext context) {
-    if(Platform.isIOS){
+    var isLoggedIn = Provider.of<bool>(context);
+
+    if (Platform.isIOS) {
       return CupertinoApp(
-        home: Login(),
+        home: (isLoggedIn == null) ? loadingScreen(true) : (isLoggedIn == true) ? Landing() : Login(),
         onGenerateRoute: Routes.cupertinoRoutes,
         theme: CupertinoThemeData(
           scaffoldBackgroundColor: Colors.white,
         ),
       );
-    }else{
-
+    } else {
       return MaterialApp(
-        home: Login(),
+        home: (isLoggedIn == null) ? loadingScreen(false) : (isLoggedIn == true) ? Landing() : Login(),
         onGenerateRoute: Routes.materialRoutes,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
@@ -33,5 +61,9 @@ class PlatformApp extends StatelessWidget {
       );
     }
   }
-}
 
+  Widget loadingScreen(bool isIOS) {
+    return (isIOS)
+        ? CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator(),),) : Scaffold(body: Center(child: CircularProgressIndicator(),),);
+  }
+}

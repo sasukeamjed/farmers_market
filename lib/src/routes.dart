@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 abstract class Routes {
   static MaterialPageRoute materialRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case "/":
+      case "/landing":
         return MaterialPageRoute(builder: (BuildContext context) => Landing());
 
       case "/signup":
@@ -25,7 +25,7 @@ abstract class Routes {
 
   static CupertinoPageRoute cupertinoRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case "/":
+      case "/landing":
         return CupertinoPageRoute(builder: (BuildContext context) => Landing());
 
       case "/signup":

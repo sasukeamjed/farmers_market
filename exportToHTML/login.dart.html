@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>login.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #008000; font-weight: bold;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+login.dart</font>
+</center></td></tr></table>
+<pre>import <span class="s1">'dart:io'</span>;
+
+import <span class="s1">'package:farmersmarket/src/blocs/auth_bloc.dart'</span>;
+import <span class="s1">'package:farmersmarket/src/styles/base.dart'</span>;
+
+import <span class="s1">'package:farmersmarket/src/styles/text.dart'</span>;
+
+import <span class="s1">'package:farmersmarket/src/widgets/button.dart'</span>;
+import <span class="s1">'package:farmersmarket/src/widgets/social_buttons.dart'</span>;
+import <span class="s1">'package:farmersmarket/src/widgets/textfield.dart'</span>;
+import <span class="s1">'package:flutter/cupertino.dart'</span>;
+import <span class="s1">'package:flutter/gestures.dart'</span>;
+import <span class="s1">'package:flutter/material.dart'</span>;
+import <span class="s1">'package:provider/provider.dart'</span>;
+
+<span class="s2">class </span>Login <span class="s2">extends </span>StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    <span class="s2">final </span>authBloc = Provider.of&lt;AuthBloc&gt;(context);
+    <span class="s2">if</span>(Platform.isIOS){
+      <span class="s2">return </span>CupertinoPageScaffold(
+        child: pageBody(context, authBloc),
+      );
+    }<span class="s2">else</span>{
+      <span class="s2">return </span>Scaffold(
+        body: pageBody(context, authBloc),
+      );
+    }
+  }
+
+  Widget pageBody(BuildContext context, AuthBloc authBloc){
+    <span class="s2">return </span>ListView(
+      padding: EdgeInsets.all(<span class="s3">0.0</span>),
+      children: &lt;Widget&gt;[
+        Container(
+          height: MediaQuery.of(context).size.height * <span class="s3">.2</span>,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(<span class="s1">'assets/images/top_bg.png'</span>,),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        Container(
+          height: <span class="s3">200</span>,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(<span class="s1">'assets/images/logo.png'</span>),
+            ),
+          ),
+        ),
+       StreamBuilder&lt;String&gt;(
+         stream: authBloc.email,
+         builder: (context, snapshot) {
+           <span class="s2">return </span>AppTextField(
+             isIOS: Platform.isIOS,
+             hintText: <span class="s1">'Email'</span>,
+             cupertinoIcon: CupertinoIcons.mail_solid,
+             materialIcon: Icons.email,
+             textInputType: TextInputType.emailAddress,
+             errorText: snapshot.error,
+             onChanged: authBloc.changeEmail,
+           );
+         }
+       ),
+        StreamBuilder&lt;String&gt;(
+          stream: authBloc.password,
+          builder: (context, snapshot) {
+            <span class="s2">return </span>AppTextField(
+              isIOS: Platform.isIOS,
+              hintText: <span class="s1">'Password'</span>,
+              cupertinoIcon: IconData(<span class="s3">0xf4c9</span>, fontFamily: CupertinoIcons.iconFont, fontPackage: CupertinoIcons.iconFontPackage),
+              materialIcon: Icons.lock,
+              textInputType: TextInputType.emailAddress,
+              obscureText: <span class="s2">true</span>,
+              errorText: snapshot.error,
+              onChanged: authBloc.changePassword,
+            );
+          }
+        ),
+        StreamBuilder&lt;bool&gt;(
+          stream: authBloc.isValid,
+          builder: (context, snapshot) {
+            <span class="s2">return </span>AppButton(buttonText: <span class="s1">'Login'</span>, buttonType: (snapshot.data == <span class="s2">true</span>) ? ButtonType.LightBlue : ButtonType.Disabled,);
+          }
+        ),
+        SizedBox(
+          height: <span class="s3">6</span>,
+        ),
+        Center(
+          child: Text(<span class="s1">'Or'</span>, style: TextStyles.suggestion,),
+        ),
+        SizedBox(
+          height: <span class="s3">6</span>,
+        ),
+        Padding(
+          padding: BaseStyles.listPadding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: &lt;Widget&gt;[
+              AppSocialButton(socialType: SocialType.Facebook,),
+              SizedBox(
+                width: <span class="s3">15</span>,
+              ),
+              AppSocialButton(socialType: SocialType.Google,),
+            ],
+          ),
+        ),
+        Padding(
+          padding: BaseStyles.listPadding,
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              text: <span class="s1">'New Here? '</span>,
+              style: TextStyles.body,
+              children: [
+                TextSpan(
+                  text: <span class="s1">'Signup'</span>,
+                  style: TextStyles.link,
+                  recognizer: TapGestureRecognizer()
+                  ..onTap = () =&gt; Navigator.pushNamed(context, <span class="s1">'/signup'</span>)
+                  ,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+}
+</pre>
+</body>
+</html>
