@@ -2,6 +2,8 @@ import 'package:farmersmarket/src/blocs/auth_bloc.dart';
 import 'package:farmersmarket/src/routes.dart';
 import 'package:farmersmarket/src/screens/landing.dart';
 import 'package:farmersmarket/src/screens/login.dart';
+import 'package:farmersmarket/src/styles/colors.dart';
+import 'package:farmersmarket/src/styles/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -48,7 +50,11 @@ class PlatformApp extends StatelessWidget {
         home: (isLoggedIn == null) ? loadingScreen(true) : (isLoggedIn == true) ? Landing() : Login(),
         onGenerateRoute: Routes.cupertinoRoutes,
         theme: CupertinoThemeData(
+          primaryColor: AppColors.straw,
           scaffoldBackgroundColor: Colors.white,
+          textTheme: CupertinoTextThemeData(
+            tabLabelTextStyle: TextStyles.suggestion
+          ),
         ),
       );
     } else {

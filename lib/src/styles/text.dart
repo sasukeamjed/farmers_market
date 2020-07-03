@@ -28,4 +28,17 @@ abstract class TextStyles{
     return GoogleFonts.roboto(textStyle: TextStyle(color: AppColors.red, fontSize: 12.0));
   }
 
+  static TextStyle get title{
+    return GoogleFonts.poppins(textStyle: TextStyle(color: AppColors.darkBlue, fontSize: 40.0, fontWeight: FontWeight.bold));
+  }
+
+  static TextStyle get navTitle{
+    return GoogleFonts.poppins(textStyle: TextStyle(color: AppColors.darkBlue, fontWeight: FontWeight.bold));
+  }
+
+  static TextStyle get navTitleMaterial{
+    return GoogleFonts.poppins(textStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold));
+  }
+
+
 }

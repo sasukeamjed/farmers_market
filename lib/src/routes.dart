@@ -1,6 +1,7 @@
 import 'package:farmersmarket/src/screens/landing.dart';
 import 'package:farmersmarket/src/screens/login.dart';
 import 'package:farmersmarket/src/screens/signup.dart';
+import 'package:farmersmarket/src/screens/vendor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,11 @@ abstract class Routes {
       case "/login":
         return MaterialPageRoute(
           builder: (BuildContext context) => Login(),
+        );
+
+      case "/vendor":
+        return MaterialPageRoute(
+          builder: (BuildContext context) => Vendor(),
         );
 
       default:
