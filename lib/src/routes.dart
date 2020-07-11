@@ -1,3 +1,4 @@
+import 'package:farmersmarket/src/screens/edit_product.dart';
 import 'package:farmersmarket/src/screens/landing.dart';
 import 'package:farmersmarket/src/screens/login.dart';
 import 'package:farmersmarket/src/screens/signup.dart';
@@ -24,6 +25,11 @@ abstract class Routes {
           builder: (BuildContext context) => Vendor(),
         );
 
+      case "/editproduct":
+        return MaterialPageRoute(
+          builder: (BuildContext context) => EditProduct(),
+        );
+
       default:
         return MaterialPageRoute(builder: (BuildContext context) => Login());
     }
@@ -39,6 +45,12 @@ abstract class Routes {
 
       case "/login":
         return CupertinoPageRoute(builder: (BuildContext context) => Login());
+
+      case "/vendor":
+        return CupertinoPageRoute(builder: (BuildContext context) => Vendor());
+
+      case "/editproduct":
+        return CupertinoPageRoute(builder: (BuildContext context) => EditProduct());
 
       default:
         return CupertinoPageRoute(builder: (BuildContext context) => Login());

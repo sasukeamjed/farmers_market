@@ -32,6 +32,10 @@ abstract class TextStyles{
     return GoogleFonts.poppins(textStyle: TextStyle(color: AppColors.darkBlue, fontSize: 40.0, fontWeight: FontWeight.bold));
   }
 
+  static TextStyle get subTitle{
+    return GoogleFonts.economica(textStyle: TextStyle(color: AppColors.straw, fontSize: 30.0, fontWeight: FontWeight.bold));
+  }
+
   static TextStyle get navTitle{
     return GoogleFonts.poppins(textStyle: TextStyle(color: AppColors.darkBlue, fontWeight: FontWeight.bold));
   }
