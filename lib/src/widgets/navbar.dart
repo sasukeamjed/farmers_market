@@ -12,13 +12,13 @@ abstract class AppNavBar{
     );
   }
 
-  static SliverAppBar materialNavBar ({@required String title, TabBar tabBar}){
+  static SliverAppBar materialNavBar ({@required String title, bool pinned, TabBar tabBar}){
     return SliverAppBar(
       title: Text(title, style: TextStyles.navTitleMaterial,),
       backgroundColor: AppColors.darkBlue,
       bottom: tabBar,
       floating: true,
-      pinned: true,
+      pinned: (pinned == null ) ? true : pinned,
       snap: true,
     );
   }

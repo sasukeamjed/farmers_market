@@ -2,8 +2,10 @@ import 'package:farmersmarket/src/styles/base.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:farmersmarket/src/styles/text.dart';
 import 'package:farmersmarket/src/widgets/button.dart';
+import 'package:farmersmarket/src/widgets/dropdown_button.dart';
 import 'package:farmersmarket/src/widgets/sliver_scaffold.dart';
 import 'package:farmersmarket/src/widgets/textfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -27,6 +29,9 @@ class _EditProductState extends State<EditProduct> {
   }
 
   Widget pageBody(bool isIOS) {
+    List<String> items = List<String>();
+    items.add('Pounds');
+    items.add('Single');
     return ListView(
       children: <Widget>[
         Text(
@@ -46,12 +51,7 @@ class _EditProductState extends State<EditProduct> {
           hintText: 'Product Name',
           isIOS: isIOS,
         ),
-        AppTextField(
-          cupertinoIcon: FontAwesomeIcons.balanceScale,
-          materialIcon: FontAwesomeIcons.balanceScale,
-          hintText: 'Unit Type',
-          isIOS: isIOS,
-        ),
+        AppDropDownButton(hintText: 'Unit Type', items: items, materialIcon: FontAwesomeIcons.balanceScale, cupertinoIcon: FontAwesomeIcons.balanceScale,),
         AppTextField(
           cupertinoIcon: FontAwesomeIcons.tag,
           materialIcon: FontAwesomeIcons.tag,
