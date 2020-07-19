@@ -1,7 +1,9 @@
 import 'package:farmersmarket/src/blocs/auth_bloc.dart';
+import 'package:farmersmarket/src/blocs/product_bloc.dart';
 import 'package:farmersmarket/src/routes.dart';
 import 'package:farmersmarket/src/screens/landing.dart';
 import 'package:farmersmarket/src/screens/login.dart';
+import 'package:farmersmarket/src/services/firestore_service.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
 import 'package:farmersmarket/src/styles/text.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +20,8 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final authBloc = AuthBloc();
+  final productBloc = ProductBloc();
+  final fireStoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +31,14 @@ class _AppState extends State<App> {
         Provider(
           create: (context) => authBloc,
         ),
+        Provider(
+          create: (context) => productBloc,
+        ),
         FutureProvider(
           create: (context) => authBloc.isLoggedIn(),
+        ),
+        StreamProvider(
+          create: (context)=> fireStoreService.fetchUnitTypes(),
         ),
       ],
     );
@@ -37,6 +47,7 @@ class _AppState extends State<App> {
   @override
   void dispose() {
     authBloc.dispose();
+    productBloc.dispose();
     super.dispose();
   }
 }

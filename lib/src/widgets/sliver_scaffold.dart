@@ -8,7 +8,7 @@ abstract class AppSliverScaffold{
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
           return <Widget>[
-            AppNavBar.cupertinoSliverNavBar(title: navTitle)
+            AppNavBar.cupertinoSliverNavBar(title: navTitle, context: context)
           ];
         },
         body: pageBody,

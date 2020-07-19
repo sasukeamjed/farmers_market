@@ -8,6 +8,10 @@ abstract class TextStyles{
     return GoogleFonts.roboto(textStyle: TextStyle(color: AppColors.darkGrey, fontSize: 16.0));
   }
 
+  static TextStyle get picker{
+    return GoogleFonts.roboto(textStyle: TextStyle(color: AppColors.darkGrey, fontSize: 35.0));
+  }
+
   static TextStyle get suggestion{
     return GoogleFonts.roboto(textStyle: TextStyle(color: AppColors.lightGrey, fontSize: 14.0));
   }

@@ -18,8 +18,6 @@ import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
 
-  StreamSubscription _userSubscription;
-  StreamSubscription _errorMessageSubscription;
 
   @override
   _SignUpState createState() => _SignUpState();
@@ -27,16 +25,20 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+  StreamSubscription _userSubscription;
+  StreamSubscription _errorMessageSubscription;
+
+
   @override
   void initState() {
     final authBloc = Provider.of<AuthBloc>(context, listen: false);
-    widget._userSubscription = authBloc.user.listen((user) {
+    _userSubscription = authBloc.user.listen((user) {
       if(user != null){
         Navigator.pushReplacementNamed(context, '/landing');
       }
     });
 
-    widget._errorMessageSubscription = authBloc.errorMessage.listen((errorMessage) {
+    _errorMessageSubscription = authBloc.errorMessage.listen((errorMessage) {
       if(errorMessage != ''){
         //Show our Alert
         AppAlerts.showErrorDialog(Platform.isIOS, context, errorMessage).then((_) => authBloc.clearErrorMessage());
@@ -47,8 +49,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void dispose() {
-    widget._userSubscription.cancel();
-    widget._errorMessageSubscription.cancel();
+    _userSubscription.cancel();
+    _errorMessageSubscription.cancel();
     super.dispose();
   }
 
