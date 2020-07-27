@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farmersmarket/src/models/product.dart';
 import 'package:farmersmarket/src/models/user.dart';
 
 class FirestoreService {
@@ -21,5 +22,22 @@ class FirestoreService {
         (snapshot) => snapshot.data['production']
             .map<String>((type) => type.toString())
             .toList());
+  }
+
+  Future<void> addProduct(Product product) {
+    return _db
+        .collection('products')
+        .document(product.productId)
+        .setData(product.toMap());
+  }
+
+  Stream<List<Product>> fetchProductsByVendorId(String vendorId) {
+    return _db
+        .collection('products')
+        .where('vendorId', isEqualTo: vendorId)
+        .snapshots()
+        .map((query) => query.documents)
+        .map((snapshot) =>
+            snapshot.map((document) => Product.fromFirestore(document.data)).toList());
   }
 }
