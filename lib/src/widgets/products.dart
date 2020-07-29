@@ -3,6 +3,7 @@ import 'package:farmersmarket/src/blocs/auth_bloc.dart';
 import 'package:farmersmarket/src/blocs/product_bloc.dart';
 import 'package:farmersmarket/src/models/product.dart';
 import 'package:farmersmarket/src/styles/colors.dart';
+import 'package:farmersmarket/src/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
@@ -53,7 +54,12 @@ class Products extends StatelessWidget {
           itemCount: snapshot.data.length,
           itemBuilder: (context, index){
             var product = snapshot.data[index];
-            return Text(product.productName);
+            return AppCard(
+              availableUnits: product.availableUnits,
+              price: product.unitPrice,
+              productName: product.productName,
+              unitType: product.unitType,
+            );
           },
         );
       }
